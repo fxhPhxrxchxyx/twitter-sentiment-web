@@ -1,0 +1,27 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none; 
+}
+
+*:focus {
+  outline: none;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.border {
+  border-radius: 15px;
+}
+
+.button {
+  background-color: black;
+  color: white;
+  border-radius: 15px;
+  width: 100px;
+}
