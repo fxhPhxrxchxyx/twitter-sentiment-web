@@ -12,6 +12,8 @@ const Ex: React.FC<ExProps> = ({ clickedName }) => {
     (product) => product.productNames === clickedName
   );
 
+  const title = <Typography>Example tweet of {clickedName}</Typography>;
+
   const productList = filteredData.map((product) => (
     <Box
       sx={{
@@ -22,7 +24,6 @@ const Ex: React.FC<ExProps> = ({ clickedName }) => {
       }}
       key={product.id}
     >
-      <Typography> Example tweet of {product.productNames} </Typography>
       <Box
         sx={{
           width: 1000,
@@ -31,7 +32,6 @@ const Ex: React.FC<ExProps> = ({ clickedName }) => {
           minHeight: 100,
           marginLeft: "20px",
           marginRight: "20px",
-          marginTop: "20px",
         }}
       >
         {/* Content of each tweet */}
@@ -66,6 +66,7 @@ const Ex: React.FC<ExProps> = ({ clickedName }) => {
           flexDirection: "column",
         }}
       >
+        {title}
         {productList}
       </Box>
     </Box>

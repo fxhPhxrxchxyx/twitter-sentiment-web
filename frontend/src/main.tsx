@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import App from "./App.tsx";
@@ -25,16 +25,12 @@ const theme = createTheme({
 });
 
 export const AppWithMoodCards: React.FC = () => {
-  const [clickedProductName, setClickedProductName] = useState<string | null>(
-    null
-  );
+  const [clickedProductName, setClickedProductName] = React.useState<
+    string | null
+  >(null);
 
   const handleCardClick = (productName: string) => {
-    if (productName === clickedProductName) {
-      setClickedProductName(null);
-    } else {
-      setClickedProductName(productName);
-    }
+    setClickedProductName(productName);
   };
 
   return (
