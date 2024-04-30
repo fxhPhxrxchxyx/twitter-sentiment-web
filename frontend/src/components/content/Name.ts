@@ -3,7 +3,7 @@ export type Product = {
   productNames: string;
   detail: string;
   mood: string;
-  percent: number;
+  percent?: number;
 };
 
 export const prodData: Product[] = [
@@ -15,5 +15,5 @@ export const prodData: Product[] = [
     percent: 40,
   },
   { id: 2, productNames: "Excel", detail: "", mood: "sad", percent: 40 },
-  { id: 3, productNames: "Excel", detail: "", mood: "Neutral", percent: 40 },
+  { id: 3, productNames: "Excel", detail: "", mood: "Neutral" },
 ];

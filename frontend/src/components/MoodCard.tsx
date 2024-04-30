@@ -60,7 +60,8 @@ const MoodCard: React.FC<ProductProps> = ({ productNames, onClick }) => {
             }}
           >
             <Typography variant="h5">
-              {productNames.mood} {productNames.percent} %
+              {productNames.mood}
+              {productNames.percent ? `${productNames.percent} %` : ""}
             </Typography>
           </Box>
         </Box>
