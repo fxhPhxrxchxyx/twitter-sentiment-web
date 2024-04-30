@@ -1,14 +1,23 @@
-import "./App.css";
-import "@mui/material/styles";
+import React from "react";
+import { Box, Button, TextField } from "@mui/material";
 
-import { Box, Button,TextField,} from "@mui/material";
+type AppProps = {
+  onSearch: () => void; // Function to handle search action
+  setTweetUrl: React.Dispatch<React.SetStateAction<string>>; // Function to update tweet URL state
+};
 
-function App() {
+const App: React.FC<AppProps> = ({ onSearch, setTweetUrl }) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTweetUrl(event.target.value);
+  };
+
+  const handleButtonClick = () => {
+    onSearch();
+  };
+
   return (
     <Box>
-      <Box
-        sx={{ display: "flex", justifyContent: "center",padding:'20px'}}
-      >
+      <Box sx={{ display: "flex", justifyContent: "center", padding: "20px" }}>
         <Box
           sx={{
             width: 1000,
@@ -23,15 +32,19 @@ function App() {
             label="Paste your tweet url here"
             color="primary"
             id="tweetUrl"
+            onChange={handleInputChange}
           />
-          <Button variant="contained" sx={{ flex: "none" }}>
-            search
+          <Button
+            variant="contained"
+            sx={{ flex: "none" }}
+            onClick={handleButtonClick}
+          >
+            Search
           </Button>
         </Box>
       </Box>
-
     </Box>
   );
-}
+};
 
 export default App;

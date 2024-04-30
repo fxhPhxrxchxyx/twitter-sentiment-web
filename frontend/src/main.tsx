@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import App from "./App.tsx";
@@ -25,24 +25,25 @@ const theme = createTheme({
 });
 
 export const AppWithMoodCards: React.FC = () => {
-  const [clickedProductName, setClickedProductName] = React.useState<
-    string | null
-  >(null);
+  const [tweetUrl, setTweetUrl] = useState<string>("");
+  const [clickedProductName, setClickedProductName] = useState<string | null>(
+    null
+  );
 
-  const handleCardClick = (productName: string) => {
-    setClickedProductName(productName);
+  const handleSearch = () => {
+    console.log("Tweet URL:", tweetUrl);
   };
 
   return (
     <React.StrictMode>
       <ThemeProvider theme={theme}>
-        <App />
+        <App onSearch={handleSearch} setTweetUrl={setTweetUrl} />
         <Tweet />
         {prodData.map((product) => (
           <MoodCard
             key={product.id}
             productNames={product}
-            onClick={() => handleCardClick(product.productNames)}
+            onClick={() => setClickedProductName(product.productNames)}
           />
         ))}
         {clickedProductName && <Ex clickedName={clickedProductName} />}
