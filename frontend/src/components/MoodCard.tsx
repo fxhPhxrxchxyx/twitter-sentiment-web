@@ -8,21 +8,29 @@ type ProductProps = {
 };
 
 const MoodCard: React.FC<ProductProps> = ({ productNames, onClick }) => {
-  const [clicked, setClicked] = useState<boolean>(false);
+  const [hovered, setHovered] = useState<boolean>(false);
 
-  const handleClick = () => {
-    setClicked(!clicked);
-    onClick();
+  const handleMouseEnter = () => {
+    setHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setHovered(false);
   };
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "center" }}>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+      }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <Box
         sx={{
           margin: "20px",
           width: 1000,
-          marginLeft: "20px",
-          marginRight: "20px",
           display: "grid",
           gridTemplateColumns: "repeat(2, 1fr)",
           gap: 2,
@@ -37,9 +45,9 @@ const MoodCard: React.FC<ProductProps> = ({ productNames, onClick }) => {
             display: "flex",
             flexDirection: "column",
             transition: "transform 0.3s",
-            transform: clicked ? "scale(1.05)" : "scale(1)",
+            transform: hovered ? "scale(1.05)" : "scale(1)",
           }}
-          onClick={handleClick}
+          onClick={onClick}
         >
           <Typography sx={{ margin: 1 }}>
             {productNames.productNames}
