@@ -1,7 +1,20 @@
+import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
-import { Key } from "react";
+import { Product } from "./content/Name";
 
-const MoodCard = ({ productNames }) => {
+type ProductProps = {
+  productNames: Product;
+  onClick: () => void;
+};
+
+const MoodCard: React.FC<ProductProps> = ({ productNames, onClick }) => {
+  const [clicked, setClicked] = useState<boolean>(false);
+
+  const handleClick = () => {
+    setClicked(!clicked);
+    onClick();
+  };
+
   return (
     <Box sx={{ display: "flex", justifyContent: "center" }}>
       <Box
@@ -11,39 +24,38 @@ const MoodCard = ({ productNames }) => {
           marginLeft: "20px",
           marginRight: "20px",
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(48%, 1fr))",
+          gridTemplateColumns: "repeat(2, 1fr)",
           gap: 2,
         }}
       >
-        {productNames.map(
-          (
-            productName: string | number | boolean | null | undefined,
-            index: Key | null | undefined
-          ) => (
-            <Box
-              key={index}
-              sx={{
-                borderRadius: "10px",
-                minHeight: 100,
-                backgroundColor: "#edf5ff",
-                display: "flex",
-                flexDirection: "column", // Setting column layout for inner content
-                padding: 1,
-              }}
-            >
-              <Typography sx={{ margin: 1 }}>{productName}</Typography>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  marginTop: "auto",
-                }}
-              >
-                <Typography variant="h5">mood %</Typography>
-              </Box>
-            </Box>
-          )
-        )}
+        <Box
+          key={productNames.id}
+          sx={{
+            borderRadius: "10px",
+            minHeight: 100,
+            backgroundColor: "#edf5ff",
+            display: "flex",
+            flexDirection: "column",
+            transition: "transform 0.3s",
+            transform: clicked ? "scale(1.05)" : "scale(1)",
+          }}
+          onClick={handleClick}
+        >
+          <Typography sx={{ margin: 1 }}>
+            {productNames.productNames}
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              padding: 2,
+            }}
+          >
+            <Typography variant="h5">
+              {productNames.mood} {productNames.percent} %
+            </Typography>
+          </Box>
+        </Box>
       </Box>
     </Box>
   );
