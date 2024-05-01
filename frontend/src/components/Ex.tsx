@@ -44,3 +44,4 @@ const Ex: React.FC<ExProps> = ({ clickedName }) => {
 };
 
 export default Ex;
+``;

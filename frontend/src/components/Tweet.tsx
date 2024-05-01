@@ -24,7 +24,6 @@ const Tweet: React.FC<TweetProps> = ({ post }) => {
           minHeight: 100,
           marginLeft: "20px",
           marginRight: "20px",
-          marginTop: "20px",
         }}
       >
         <Box margin={2} sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
