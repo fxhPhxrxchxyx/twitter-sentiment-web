@@ -6,6 +6,7 @@ import Tweet from "./components/Tweet";
 import MoodCard from "./components/MoodCard.tsx";
 import Ex from "./components/Ex";
 import { prodData } from "./components/content/Name.ts";
+import { postData } from "./components/content/Post.ts";
 import { Box, Grid } from "@mui/material";
 
 const theme = createTheme({
@@ -33,7 +34,10 @@ export const AppWithMoodCards: React.FC = () => {
     <React.StrictMode>
       <ThemeProvider theme={theme}>
         <App onSearch={handleSearch} setTweetUrl={setTweetUrl} />
-        <Tweet />
+        {postData.map((post) => (
+          <Tweet key={post.id} post={post} />
+        ))}
+
         <Box
           sx={(theme) => ({
             display: "flex",
