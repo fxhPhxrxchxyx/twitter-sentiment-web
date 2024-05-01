@@ -5,12 +5,13 @@ import { Post } from "./content/Post";
 
 interface ExProps {
   clickedName: string;
+  post: Post;
 }
 
 const Ex: React.FC<ExProps> = ({ clickedName }) => {
   const title = <Typography>Example tweet of {clickedName}</Typography>;
 
-  const filteredTweets = Post.filter(
+  const filteredTweets = post.filter(
     (post) => post.brand.toLowerCase() === clickedName.toLowerCase()
   );
 
