@@ -41,7 +41,7 @@ const MoodCard: React.FC<ProductProps> = ({ productNames, onClick }) => {
           sx={{
             borderRadius: "10px",
             minHeight: 100,
-            backgroundColor: "#edf5ff",
+            backgroundColor: hovered ? "#ffb74d" : "#edf5ff",
             display: "flex",
             flexDirection: "column",
             transition: "transform 0.3s",
