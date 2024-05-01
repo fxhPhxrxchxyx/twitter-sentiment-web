@@ -3,11 +3,11 @@ import { Box, Grid, Typography } from "@mui/material";
 import { Product } from "./content/Name";
 
 type ProductProps = {
-  productNames: Product;
+  product: Product;
   onClick: () => void;
 };
 
-const MoodCard: React.FC<ProductProps> = ({ productNames, onClick }) => {
+const MoodCard: React.FC<ProductProps> = ({ product, onClick }) => {
   const [hovered, setHovered] = useState<boolean>(false);
 
   const handleMouseEnter = () => {
@@ -36,7 +36,7 @@ const MoodCard: React.FC<ProductProps> = ({ productNames, onClick }) => {
           }}
         >
           <Box
-            key={productNames.id}
+            key={product.brand}
             sx={{
               borderRadius: "10px",
               minHeight: 100,
@@ -48,9 +48,7 @@ const MoodCard: React.FC<ProductProps> = ({ productNames, onClick }) => {
             }}
             onClick={onClick}
           >
-            <Typography sx={{ margin: 1 }}>
-              {productNames.productNames}
-            </Typography>
+            <Typography sx={{ margin: 1 }}>{product.brand}</Typography>
             <Box
               sx={{
                 display: "flex",
@@ -58,10 +56,7 @@ const MoodCard: React.FC<ProductProps> = ({ productNames, onClick }) => {
                 padding: 2,
               }}
             >
-              <Typography variant="h5">
-                {productNames.mood}
-                {productNames.percent ? `${productNames.percent} %` : ""}
-              </Typography>
+              <Typography variant="h5">{product.sentiment}</Typography>
             </Box>
           </Box>
         </Box>

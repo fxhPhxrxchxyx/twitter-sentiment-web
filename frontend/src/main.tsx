@@ -1,16 +1,12 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import ReactDOM from "react-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import App from "./App.tsx";
 import Tweet from "./components/Tweet";
 import MoodCard from "./components/MoodCard.tsx";
 import Ex from "./components/Ex";
-// import { Product, prodData } from "./components/content/Name.ts";
-// import { Post, postData } from "./components/content/Post.ts";
-import { prodData } from "./components/content/Name.ts";
-import { postData } from "./components/content/Post.ts";
 import { Box, Grid } from "@mui/material";
-// import { getTweet } from "./getTweet.service.ts";
+import { getTweet } from "./getTweet.service.ts";
 
 const theme = createTheme({
   palette: {
@@ -29,27 +25,25 @@ export const AppWithMoodCards: React.FC = () => {
     null
   );
   const [result, setResult] = useState(null);
-  // const [isLoading, setIsLoading] = useState<boolean>();
-  // const [productData, setProductData] = useState<Product[]>([]);
-  // const [brandata, setBrandData] = useState<Post[]>([]);
+  const [, setIsLoading] = useState<boolean>();
 
-  // const getPost = useCallback(
-  //   (text: string) => {
-  //     setIsLoading(true);
-  //     getTweet(text)
-  //       .then(() => {
-  //         //setdata here
-  //       })
-  //       .finally(() => {
-  //         setIsLoading(false);
-  //       });
-  //   },
-  //   [setIsLoading]
-  // );
+  const getPost = useCallback(
+    (text: string) => {
+      setIsLoading(true);
+      getTweet(text)
+        .then((data) => {
+          //setdata here
+          setResult(data);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    },
+    [setIsLoading]
+  );
 
   const handleSearch = () => {
-    // getPost(tweetUrl);
-    setResult(1);
+    getPost(tweetUrl);
     console.log("Tweet URL:", tweetUrl);
   };
 
@@ -59,10 +53,9 @@ export const AppWithMoodCards: React.FC = () => {
         <App onSearch={handleSearch} setTweetUrl={setTweetUrl} />
         {result != null && (
           <>
-            {postData.map((post) => (
-              <Tweet key={post.id} post={post} />
+            {result.result.examples.map((post) => (
+              <Tweet key={post.from} post={post} />
             ))}
-
             <Box
               sx={(theme) => ({
                 display: "flex",
@@ -75,11 +68,11 @@ export const AppWithMoodCards: React.FC = () => {
               })}
             >
               <Grid container>
-                {prodData.map((product) => (
+                {result.result.sentiment.map((product) => (
                   <MoodCard
-                    key={product.id}
-                    productNames={product}
-                    onClick={() => setClickedProductName(product.productNames)}
+                    key={product.brand}
+                    product={product}
+                    onClick={() => setClickedProductName(product.brand)}
                   />
                 ))}
               </Grid>

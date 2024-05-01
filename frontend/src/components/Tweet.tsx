@@ -28,12 +28,14 @@ const Tweet: React.FC<TweetProps> = ({ post }) => {
       >
         <Box margin={2} sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
           <Box>
-            <Avatar alt="owner" src={post.path} />
+            <Avatar
+              alt="owner"
+              src="https://www.allkpop.com/upload/2023/04/content/180144/web_data/allkpop_1681796882_20230408-jaehyun.jpeg"
+            />
           </Box>
           <Box>
-            <Typography>{post.Username}</Typography>
-            <Typography>@{post.account}</Typography>
-            <Typography sx={{ marginTop: "10px" }}>{post.detail}</Typography>
+            <Typography>{post.from}</Typography>
+            <Typography sx={{ marginTop: "10px" }}>{post.text}</Typography>
           </Box>
         </Box>
       </Box>
