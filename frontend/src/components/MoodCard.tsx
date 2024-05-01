@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { Product } from "./content/Name";
 
 type ProductProps = {
@@ -19,54 +19,54 @@ const MoodCard: React.FC<ProductProps> = ({ productNames, onClick }) => {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-      }}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
+    <Grid item xs={6}>
       <Box
         sx={{
-          margin: "20px",
-          width: 1000,
-          display: "grid",
-          gridTemplateColumns: "repeat(2, 1fr)",
-          gap: 2,
+          display: "flex",
+          justifyContent: "center",
         }}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         <Box
-          key={productNames.id}
           sx={{
-            borderRadius: "10px",
-            minHeight: 100,
-            backgroundColor: hovered ? "#ffb74d" : "#edf5ff",
-            display: "flex",
-            flexDirection: "column",
-            transition: "transform 0.3s",
-            transform: hovered ? "scale(1.05)" : "scale(1)",
+            margin: "20px",
+            width: "100%",
+            gap: 2,
           }}
-          onClick={onClick}
         >
-          <Typography sx={{ margin: 1 }}>
-            {productNames.productNames}
-          </Typography>
           <Box
+            key={productNames.id}
             sx={{
+              borderRadius: "10px",
+              minHeight: 100,
+              backgroundColor: hovered ? "#ffb74d" : "#edf5ff",
               display: "flex",
-              justifyContent: "flex-end",
-              padding: 2,
+              flexDirection: "column",
+              transition: "transform 0.3s",
+              transform: hovered ? "scale(1.05)" : "scale(1)",
             }}
+            onClick={onClick}
           >
-            <Typography variant="h5">
-              {productNames.mood}
-              {productNames.percent ? `${productNames.percent} %` : ""}
+            <Typography sx={{ margin: 1 }}>
+              {productNames.productNames}
             </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "flex-end",
+                padding: 2,
+              }}
+            >
+              <Typography variant="h5">
+                {productNames.mood}
+                {productNames.percent ? `${productNames.percent} %` : ""}
+              </Typography>
+            </Box>
           </Box>
         </Box>
       </Box>
-    </Box>
+    </Grid>
   );
 };
 

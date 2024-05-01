@@ -66,8 +66,16 @@ const Ex: React.FC<ExProps> = ({ clickedName }) => {
         flexDirection: "column",
       }}
     >
-      <Box sx={{ marginLeft: 5 }}> {title}</Box>
-
+      <Box
+        sx={(theme) => ({
+          marginLeft: 25,
+          [theme.breakpoints.down("md")]: {
+            margin: 0,
+          },
+        })}
+      >
+        {title}
+      </Box>
       {productList}
     </Box>
   );

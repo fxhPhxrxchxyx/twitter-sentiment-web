@@ -6,6 +6,7 @@ import Tweet from "./components/Tweet";
 import MoodCard from "./components/MoodCard.tsx";
 import Ex from "./components/Ex";
 import { prodData } from "./components/content/Name.ts";
+import { Box, Grid } from "@mui/material";
 
 const theme = createTheme({
   palette: {
@@ -33,13 +34,27 @@ export const AppWithMoodCards: React.FC = () => {
       <ThemeProvider theme={theme}>
         <App onSearch={handleSearch} setTweetUrl={setTweetUrl} />
         <Tweet />
-        {prodData.map((product) => (
-          <MoodCard
-            key={product.id}
-            productNames={product}
-            onClick={() => setClickedProductName(product.productNames)}
-          />
-        ))}
+        <Box
+          sx={(theme) => ({
+            display: "flex",
+            justifyContent: "center",
+            marginRight: 25,
+            marginLeft: 25,
+            [theme.breakpoints.down("md")]: {
+              margin: 0,
+            },
+          })}
+        >
+          <Grid container>
+            {prodData.map((product) => (
+              <MoodCard
+                key={product.id}
+                productNames={product}
+                onClick={() => setClickedProductName(product.productNames)}
+              />
+            ))}
+          </Grid>
+        </Box>
         {clickedProductName && <Ex clickedName={clickedProductName} />}
       </ThemeProvider>
     </React.StrictMode>
