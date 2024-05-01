@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import Tweet from "./Tweet";
-// import { Post } from "./content/Post";
+import { Post } from "./content/Post";
 
 interface ExProps {
   clickedName: string;
@@ -11,7 +11,7 @@ const Ex: React.FC<ExProps> = ({ clickedName }) => {
   const title = <Typography>Example tweet of {clickedName}</Typography>;
 
   const filteredTweets = Post.filter(
-    (post) => post.Username.toLowerCase() === clickedName.toLowerCase()
+    (post) => post.brand.toLowerCase() === clickedName.toLowerCase()
   );
 
   const tweetList = filteredTweets.map((tweet) => (
@@ -44,4 +44,3 @@ const Ex: React.FC<ExProps> = ({ clickedName }) => {
 };
 
 export default Ex;
-``;

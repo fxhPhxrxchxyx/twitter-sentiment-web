@@ -56,6 +56,7 @@ export const AppWithMoodCards: React.FC = () => {
             {result.result.examples.map((post) => (
               <Tweet key={post.from} post={post} />
             ))}
+
             <Box
               sx={(theme) => ({
                 display: "flex",
