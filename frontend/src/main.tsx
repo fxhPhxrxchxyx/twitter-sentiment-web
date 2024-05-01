@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import ReactDOM from "react-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import App from "./App.tsx";
 import Tweet from "./components/Tweet";
 import MoodCard from "./components/MoodCard.tsx";
 import Ex from "./components/Ex";
-import { prodData } from "./components/content/Name.ts";
-import { postData } from "./components/content/Post.ts";
+import { Product, prodData } from "./components/content/Name.ts";
+import { Post, postData } from "./components/content/Post.ts";
 import { Box, Grid } from "@mui/material";
+import { getTweet } from "./getTweet.service.ts";
 
 const theme = createTheme({
   palette: {
@@ -25,8 +26,26 @@ export const AppWithMoodCards: React.FC = () => {
   const [clickedProductName, setClickedProductName] = useState<string | null>(
     null
   );
+  const [isLoading, setIsLoading] = useState<boolean>();
+  const [productData, setProductData] = useState<Product[]>([]);
+  const [brandata, setBrandData] = useState<Post[]>([]);
+
+  const getPost = useCallback(
+    (text: string) => {
+      setIsLoading(true);
+      getTweet(text)
+        .then(() => {
+          //setdata here
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    },
+    [setIsLoading]
+  );
 
   const handleSearch = () => {
+    getPost(tweetUrl);
     console.log("Tweet URL:", tweetUrl);
   };
 
