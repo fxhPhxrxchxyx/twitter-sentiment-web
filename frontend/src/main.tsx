@@ -6,7 +6,7 @@ import Tweet from "./components/Tweet";
 import MoodCard from "./components/MoodCard.tsx";
 import Ex from "./components/Ex";
 import { Box, Grid } from "@mui/material";
-import { getTweet } from "./getTweet.service.ts";
+import {getTweet, IGetTweetServiceResult} from "./getTweet.service.ts";
 
 const theme = createTheme({
   palette: {
@@ -24,7 +24,7 @@ export const AppWithMoodCards: React.FC = () => {
   const [clickedProductName, setClickedProductName] = useState<string | null>(
     null
   );
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState<IGetTweetServiceResult | null>(null);
   const [, setIsLoading] = useState<boolean>();
 
   const getPost = useCallback(
