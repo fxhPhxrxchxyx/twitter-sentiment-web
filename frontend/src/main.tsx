@@ -67,15 +67,7 @@ export const AppWithMoodCards: React.FC = () => {
         )}
         {result != null && (
           <>
-            {result.result.map((brand) =>
-              brand.examples.map((tweet) => (
-                <Tweet
-                  key={tweet.from}
-                  textTweet={tweet.text}
-                  from={tweet.from}
-                />
-              ))
-            )}
+            <Tweet textTweet={tweetUrl} from={"Your Search"} />
 
             <Box
               sx={(theme) => ({
