@@ -1,15 +1,8 @@
 import axios from "axios";
+import { BrandSentiment } from "./components/content/Name";
 
 export interface IGetTweetServiceResult {
-    result: {
-      brand: string;
-        sentiment: string;
-        examples: {
-            sentiment: string;
-            text: string;
-            from: string;
-        }[]
-    }[]
+  result: BrandSentiment[];
 }
 
 export const getTweet = async (text: string) => {
@@ -19,5 +12,6 @@ export const getTweet = async (text: string) => {
       tweet: text,
     }
   );
+  console.log(resp.data);
   return resp.data;
 };

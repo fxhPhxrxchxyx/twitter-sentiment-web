@@ -53,9 +53,15 @@ export const AppWithMoodCards: React.FC = () => {
         <App onSearch={handleSearch} setTweetUrl={setTweetUrl} />
         {result != null && (
           <>
-            {result.result.examples.map((post) => (
-              <Tweet key={post.from} post={post} />
-            ))}
+            {result.result.map((brand) =>
+              brand.examples.map((tweet) => (
+                <Tweet
+                  key={tweet.from}
+                  textTweet={tweet.text}
+                  from={tweet.from}
+                />
+              ))
+            )}
 
             <Box
               sx={(theme) => ({
@@ -69,16 +75,26 @@ export const AppWithMoodCards: React.FC = () => {
               })}
             >
               <Grid container>
-                {result.result.sentiment.map((product) => (
+                {result.result.map((brand) => (
                   <MoodCard
-                    key={product.brand}
-                    product={product}
-                    onClick={() => setClickedProductName(product.brand)}
+                    key={brand.brand}
+                    sentiment={brand.sentiment}
+                    brand={brand.brand}
+                    onClick={() => setClickedProductName(brand.brand)}
                   />
                 ))}
               </Grid>
             </Box>
-            {clickedProductName && <Ex clickedName={clickedProductName} />}
+            {clickedProductName && (
+              <Ex
+                brand={clickedProductName}
+                examples={
+                  result.result.find(
+                    (item) => item.brand === clickedProductName
+                  )?.examples
+                }
+              />
+            )}
           </>
         )}
       </ThemeProvider>

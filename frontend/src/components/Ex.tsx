@@ -1,23 +1,19 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import Tweet from "./Tweet";
-import { Post } from "./content/Post";
+import { TweetSentiment } from "./content/Name";
 
 interface ExProps {
-  clickedName: string;
-  post: Post;
+  examples: TweetSentiment[] | undefined;
+  brand: string;
 }
 
-const Ex: React.FC<ExProps> = ({ clickedName }) => {
-  const title = <Typography>Example tweet of {clickedName}</Typography>;
+const Ex: React.FC<ExProps> = ({ examples, brand }) => {
+  const title = <Typography>Example tweet of {brand}</Typography>;
 
-  const filteredTweets = post.filter(
-    (post) => post.brand.toLowerCase() === clickedName.toLowerCase()
-  );
-
-  const tweetList = filteredTweets.map((tweet) => (
+  const tweetList = examples?.map((tweet) => (
     <Box key={tweet.from} margin={2}>
-      <Tweet post={tweet} />
+      <Tweet textTweet={tweet.text} from={tweet.from} />
     </Box>
   ));
 

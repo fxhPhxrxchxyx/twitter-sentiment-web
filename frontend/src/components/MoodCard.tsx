@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Box, Grid, Typography } from "@mui/material";
-import { Product } from "./content/Name";
 
 type ProductProps = {
-  product: Product;
+  sentiment: string;
+  brand: string;
   onClick: () => void;
 };
 
-const MoodCard: React.FC<ProductProps> = ({ product, onClick }) => {
+const MoodCard: React.FC<ProductProps> = ({ sentiment, brand, onClick }) => {
   const [hovered, setHovered] = useState<boolean>(false);
 
   const handleMouseEnter = () => {
@@ -36,7 +36,7 @@ const MoodCard: React.FC<ProductProps> = ({ product, onClick }) => {
           }}
         >
           <Box
-            key={product.brand}
+            key={brand}
             sx={{
               borderRadius: "10px",
               minHeight: 100,
@@ -48,7 +48,7 @@ const MoodCard: React.FC<ProductProps> = ({ product, onClick }) => {
             }}
             onClick={onClick}
           >
-            <Typography sx={{ margin: 1 }}>{product.brand}</Typography>
+            <Typography sx={{ margin: 1 }}>{brand}</Typography>
             <Box
               sx={{
                 display: "flex",
@@ -56,7 +56,7 @@ const MoodCard: React.FC<ProductProps> = ({ product, onClick }) => {
                 padding: 2,
               }}
             >
-              <Typography variant="h5">{product.sentiment}</Typography>
+              <Typography variant="h5">{sentiment}</Typography>
             </Box>
           </Box>
         </Box>

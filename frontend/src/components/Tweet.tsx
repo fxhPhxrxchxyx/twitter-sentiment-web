@@ -1,12 +1,12 @@
 import React from "react";
 import { Avatar, Box, Typography } from "@mui/material";
-import { Post } from "./content/Post";
 
 type TweetProps = {
-  post: Post;
+  textTweet: string;
+  from: string;
 };
 
-const Tweet: React.FC<TweetProps> = ({ post }) => {
+const Tweet: React.FC<TweetProps> = ({ textTweet, from }) => {
   return (
     <Box
       sx={{
@@ -34,8 +34,8 @@ const Tweet: React.FC<TweetProps> = ({ post }) => {
             />
           </Box>
           <Box>
-            <Typography>{post.from}</Typography>
-            <Typography sx={{ marginTop: "10px" }}>{post.text}</Typography>
+            <Typography>{from}</Typography>
+            <Typography sx={{ marginTop: "10px" }}>{textTweet}</Typography>
           </Box>
         </Box>
       </Box>
