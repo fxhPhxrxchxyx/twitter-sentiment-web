@@ -31,6 +31,7 @@ export const AppWithMoodCards: React.FC = () => {
 
   const getPost = useCallback(
     (text: string) => {
+      setResult(null);
       setIsLoading(true);
       getTweet(text)
         .then((data) => {
@@ -41,7 +42,7 @@ export const AppWithMoodCards: React.FC = () => {
           setIsLoading(false);
         });
     },
-    [setIsLoading]
+    [setIsLoading, setResult]
   );
 
   const handleSearch = () => {
@@ -70,37 +71,53 @@ export const AppWithMoodCards: React.FC = () => {
             <Tweet textTweet={tweetUrl} from={"Your Search"} sentiment={""} />
 
             <Box
-              sx={(theme) => ({
+              sx={{
                 display: "flex",
                 justifyContent: "center",
-                marginRight: 25,
-                marginLeft: 25,
-                [theme.breakpoints.down("md")]: {
-                  margin: 0,
-                },
-              })}
+              }}
             >
-              <Grid container>
-                {result.result.map((brand) => (
-                  <MoodCard
-                    key={brand.brand}
-                    sentiment={brand.sentiment}
-                    brand={brand.brand}
-                    onClick={() => setClickedProductName(brand.brand)}
-                  />
-                ))}
-              </Grid>
+              <Box
+                sx={{
+                  width: 1000,
+                  maxWidth: "100%",
+                }}
+              >
+                <Grid container>
+                  {result.result.map((brand) => (
+                    <MoodCard
+                      key={brand.brand}
+                      sentiment={brand.sentiment}
+                      brand={brand.brand}
+                      onClick={() => setClickedProductName(brand.brand)}
+                    />
+                  ))}
+                </Grid>
+              </Box>
             </Box>
-            {clickedProductName && (
-              <Ex
-                brand={clickedProductName}
-                examples={
-                  result.result.find(
-                    (item) => item.brand === clickedProductName
-                  )?.examples
-                }
-              />
-            )}
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <Box
+                sx={{
+                  width: 1000,
+                  maxWidth: "100%",
+                }}
+              >
+                {clickedProductName && (
+                  <Ex
+                    brand={clickedProductName}
+                    examples={
+                      result.result.find(
+                        (item) => item.brand === clickedProductName
+                      )?.examples
+                    }
+                  />
+                )}
+              </Box>
+            </Box>
           </>
         )}
         {(result == null || result.result.length == 0) &&

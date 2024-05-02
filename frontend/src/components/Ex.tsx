@@ -30,14 +30,19 @@ const Ex: React.FC<ExProps> = ({ examples, brand }) => {
       }}
     >
       <Box
-        sx={(theme) => ({
-          marginLeft: 25,
-          [theme.breakpoints.down("md")]: {
-            margin: 0,
-          },
-        })}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+        }}
       >
-        {title}
+        <Box
+          sx={{
+            width: 1000,
+            maxWidth: "100%",
+          }}
+        >
+          {title}
+        </Box>
       </Box>
       {tweetList}
     </Box>
