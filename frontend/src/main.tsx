@@ -5,8 +5,8 @@ import App from "./App.tsx";
 import Tweet from "./components/Tweet";
 import MoodCard from "./components/MoodCard.tsx";
 import Ex from "./components/Ex";
-import { Box, Grid } from "@mui/material";
-import {getTweet, IGetTweetServiceResult} from "./getTweet.service.ts";
+import { Box, Grid, Typography } from "@mui/material";
+import { getTweet, IGetTweetServiceResult } from "./getTweet.service.ts";
 import { DotLoader } from "react-spinners";
 
 const theme = createTheme({
@@ -26,7 +26,8 @@ export const AppWithMoodCards: React.FC = () => {
     null
   );
   const [result, setResult] = useState<IGetTweetServiceResult | null>(null);
-  const [isLoding, setIsLoading] = useState<boolean>();
+  const [isLoading, setIsLoading] = useState<boolean>();
+  const [isSearchClick, setIsSearchClick] = useState<boolean>(false);
 
   const getPost = useCallback(
     (text: string) => {
@@ -44,6 +45,7 @@ export const AppWithMoodCards: React.FC = () => {
   );
 
   const handleSearch = () => {
+    setIsSearchClick(true);
     getPost(tweetUrl);
     console.log("Tweet URL:", tweetUrl);
   };
@@ -52,7 +54,7 @@ export const AppWithMoodCards: React.FC = () => {
     <React.StrictMode>
       <ThemeProvider theme={theme}>
         <App onSearch={handleSearch} setTweetUrl={setTweetUrl} />
-        {isLoding && (
+        {isLoading && (
           <Box
             sx={{
               display: "flex",
@@ -109,6 +111,13 @@ export const AppWithMoodCards: React.FC = () => {
             )}
           </>
         )}
+        {(result == null || result.result.length == 0) &&
+          isSearchClick &&
+          !isLoading && (
+            <Typography textAlign="center" marginTop={20}>
+              Data not found😔
+            </Typography>
+          )}
       </ThemeProvider>
     </React.StrictMode>
   );
