@@ -13,7 +13,11 @@ const Ex: React.FC<ExProps> = ({ examples, brand }) => {
 
   const tweetList = examples?.map((tweet) => (
     <Box key={tweet.from} margin={2}>
-      <Tweet textTweet={tweet.text} from={tweet.from} />
+      <Tweet
+        textTweet={tweet.text}
+        from={tweet.from}
+        sentiment={tweet.sentiment}
+      />
     </Box>
   ));
 

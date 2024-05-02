@@ -4,9 +4,10 @@ import { Avatar, Box, Typography } from "@mui/material";
 type TweetProps = {
   textTweet: string;
   from: string;
+  sentiment: string;
 };
 
-const Tweet: React.FC<TweetProps> = ({ textTweet, from }) => {
+const Tweet: React.FC<TweetProps> = ({ textTweet, from, sentiment }) => {
   return (
     <Box
       sx={{
@@ -36,6 +37,15 @@ const Tweet: React.FC<TweetProps> = ({ textTweet, from }) => {
           <Box>
             <Typography>{from}</Typography>
             <Typography sx={{ marginTop: "10px" }}>{textTweet}</Typography>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "flex-end",
+                padding: 2,
+              }}
+            >
+              <Typography variant="h5">{sentiment}</Typography>
+            </Box>
           </Box>
         </Box>
       </Box>

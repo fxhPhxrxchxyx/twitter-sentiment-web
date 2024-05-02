@@ -67,7 +67,7 @@ export const AppWithMoodCards: React.FC = () => {
         )}
         {result != null && (
           <>
-            <Tweet textTweet={tweetUrl} from={"Your Search"} />
+            <Tweet textTweet={tweetUrl} from={"Your Search"} sentiment={""} />
 
             <Box
               sx={(theme) => ({
