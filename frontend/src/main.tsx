@@ -7,6 +7,7 @@ import MoodCard from "./components/MoodCard.tsx";
 import Ex from "./components/Ex";
 import { Box, Grid } from "@mui/material";
 import {getTweet, IGetTweetServiceResult} from "./getTweet.service.ts";
+import { DotLoader } from "react-spinners";
 
 const theme = createTheme({
   palette: {
@@ -25,7 +26,7 @@ export const AppWithMoodCards: React.FC = () => {
     null
   );
   const [result, setResult] = useState<IGetTweetServiceResult | null>(null);
-  const [, setIsLoading] = useState<boolean>();
+  const [isLoding, setIsLoading] = useState<boolean>();
 
   const getPost = useCallback(
     (text: string) => {
@@ -51,6 +52,17 @@ export const AppWithMoodCards: React.FC = () => {
     <React.StrictMode>
       <ThemeProvider theme={theme}>
         <App onSearch={handleSearch} setTweetUrl={setTweetUrl} />
+        {isLoding && (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: 30,
+            }}
+          >
+            <DotLoader color="#47d8ff" />
+          </Box>
+        )}
         {result != null && (
           <>
             {result.result.map((brand) =>
